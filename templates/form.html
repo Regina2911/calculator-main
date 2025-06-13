@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <title>Расчет энергоэффективности умного дома</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__text">
+      <h1>Расчитай энергоэффективность своего дома!</h1>
+      <p>Реши проблему излишнего электропотребления самостоятельно!</p>
+    </div>
+  </header>
+  <main>
+    {% block content %}
+    <h2 class="main__title">Заполните форму</h2>
+    
+<form action="/form" method="POST">
+
+    <label for="name">Введите ваше имя:</label>
+    <input type="text" name="name" id="name" placeholder="Тимур" required>
+
+    <label for="name">Введите вашу фамилию:</label>
+    <input type="text" name="surname" id="surname" placeholder="Кашин" required>
+
+    <label for="email">Введите ваш емейл:</label>
+    <input type="email" name="email" id="email" placeholder="example@test.com" required>
+
+    <label for="date">Введите дату:</label>
+    <input type="date" name="date" id="date" required>
+
+    <label for="address">Введите ваш адрес:</label>
+    <input type="text" name="address" id="address" placeholder="ул. Ленина, д. 10, кв. 5" required>
+
+    <button type="submit">Отправить данные</button>
+
+</form>
+
+
+
+    {% endblock %}
+  </main>
+  <footer>
+  </footer>
+</body>
+</html>
