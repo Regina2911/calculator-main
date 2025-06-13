@@ -1,8 +1,12 @@
 #Импорт
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
+
+def submit_form(name, surname, email, date, address):
+    with open('form.txt', 'a', encoding='utf-8') as f:
+        f.write(f"{name} {surname}, {email}, {date}, {address}\n")
 
 def result_calculate(size, lights, device):
     #Переменные для энергозатратности приборов
@@ -15,6 +19,31 @@ def result_calculate(size, lights, device):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/form', methods = ["GET", "POST"])
+def form():
+    if request.method == "POST":
+        name = request.form.get('name')
+        surname = request.form.get('surname')
+        email = request.form.get('email')
+        date = request.form.get('date')
+        address = request.form.get('address')
+
+        submit_form(name, surname, email, date, address)
+
+        text= f"Пользователь {name} {surname} сделал заказ на {date} с почтой для связи {email} с доставкой в {address}"
+        print(text)
+
+        return render_template('form_result.html',
+                               name=name,
+                               surname=surname,
+                               email=email,
+                               address=address,
+                               date=date)
+
+    return render_template('form.html')
+
+
 
 #Вторая страница
 @app.route('/<size>')
@@ -43,3 +72,4 @@ def end(size, lights, device):
                                                     )
                         )
 app.run(debug=True)
+
